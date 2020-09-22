@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DoctorsAppMobile.Views.AppointmentsPage">
+    
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="1">
+            <ListView x:Name="appointmentsListView"
+                      RowHeight="130"
+                      SelectionMode="None"
+                      IsPullToRefreshEnabled="True"
+                      RefreshControlColor="#2d3e50">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="LightBlue"
+                                   Margin="10, 10"
+                                   CornerRadius="10"
+                                   Padding="10">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Label Grid.Row="0"
+                                               Text="Appointment Date:"
+                                               FontSize="Subtitle"/>
+                                        <Label Grid.Row="1"
+                                               Text="{Binding AppointmentTime, StringFormat='{0:dddd, dd MMMM yyyy}'}"
+                                               FontSize="Subtitle"/>
+                                        <Label Grid.Row="2"
+                                               Text="{Binding AppointmentTime, StringFormat='{0:HH:mm}'}"
+                                               FontSize="Subtitle"/>
+                                    </Grid>
+                                </Frame>
+                        </ViewCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+
+        <!--<local:AdBanner Size="FullBanner" 
+                        BackgroundColor="Transparent"
+                        Grid.Row="0" HeightRequest="75"/>-->
+    </Grid>
+
+    
+    
+</ContentPage>
