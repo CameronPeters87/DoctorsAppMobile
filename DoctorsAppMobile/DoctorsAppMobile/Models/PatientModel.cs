@@ -1,4 +1,11 @@
-﻿namespace DoctorsAppMobile.Models
+﻿using DoctorsAppMobile.Constants;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+namespace DoctorsAppMobile.Models
 {
     public class PatientModel
     {
@@ -13,5 +20,7 @@
         public bool isLoyal { get; set; }
         public int AddressId { get; set; }
         public AddressModel Address { get; set; }
+
+        
     }
 }

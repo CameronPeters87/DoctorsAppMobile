@@ -1,22 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:DoctorsAppMobile.CustomRenders;assembly=DoctorsAppMobile"
              x:Class="DoctorsAppMobile.Views.CurrentAppointmentPage">
     
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <Label Grid.Row="0"
-               Margin="0, 50, 0, 0"
+               Margin="0, 20, 0, 0"
+               Text="Loading ..."
+               HorizontalOptions="Center"
+               x:Name="loadingLabel"
+               FontSize="Title"
+               FontAttributes="Bold"/>
+
+        
+        <Label Grid.Row="1"
+               Margin="0, 0, 0, 0"
                Text="Current Appointment"
                HorizontalOptions="Center"
+               x:Name="titleLabel"
                FontSize="Title"
                FontAttributes="Bold"/>
         
-        <Frame Grid.Row="1"
+        
+        <Frame Grid.Row="2"
+               x:Name="detailsFrame"
                VerticalOptions="Center"
                BackgroundColor="LightBlue"
                Padding="10"
@@ -26,6 +41,7 @@
             <StackLayout>
                 
                 <Label Text="Details"
+                       x:Name="detailsLabel"
                        FontAttributes="Bold"
                        FontSize="Large"
                        HorizontalOptions="Center"
@@ -47,6 +63,21 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
+                    
+                    <Label Text="&#x2022; Symptoms: "
+                           FontSize="Subtitle"/>
+                    
+                    <Label Margin="20, 0"
+                           FontSize="Subtitle"
+                           FontAttributes="Italic">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Flu" 
+                                      x:Name="symptomsSpan" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
                     
                     <Label Text="&#x2022; Status: "
                            FontSize="Subtitle"/>
@@ -76,6 +107,9 @@
             
         </Frame>
 
+        <local:AdBanner Size="FullBanner"
+                        BackgroundColor="Transparent"
+                        Grid.Row="3" HeightRequest="75"/>
         
     </Grid>
     
