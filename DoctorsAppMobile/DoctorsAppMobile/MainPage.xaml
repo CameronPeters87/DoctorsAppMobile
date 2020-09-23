@@ -14,5 +14,6 @@
     
     <local:AppointmentsPage Title="Available"/>
     <local:CurrentAppointmentPage Title="Your Appointment"/>
+    <local:CurrentAppointmentPage Title="Orders"/>
 
 </TabbedPage>

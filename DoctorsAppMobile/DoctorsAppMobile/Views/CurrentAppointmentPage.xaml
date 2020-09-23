@@ -2,11 +2,81 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DoctorsAppMobile.Views.CurrentAppointmentPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0"
+               Margin="0, 50, 0, 0"
+               Text="Current Appointment"
+               HorizontalOptions="Center"
+               FontSize="Title"
+               FontAttributes="Bold"/>
+        
+        <Frame Grid.Row="1"
+               VerticalOptions="Center"
+               BackgroundColor="LightBlue"
+               Padding="10"
+               Margin="20, 20"
+               CornerRadius="20">
+        
+            <StackLayout>
+                
+                <Label Text="Details"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="Center"
+                       Margin="0, 0, 0, 20"/>
+                
+                <StackLayout Margin="10, 0, 0, 20">
+                    <Label Text="&#x2022; Appointment Date: "
+                           FontSize="Subtitle"/>
+                    
+                    <Label Margin="20, 0"
+                           FontSize="Subtitle"
+                           FontAttributes="Italic">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Friday, 20 September, " 
+                                      x:Name="dateSpan" />
+                                <Span Text="08:00" 
+                                      x:Name="timeSpan" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                    <Label Text="&#x2022; Status: "
+                           FontSize="Subtitle"/>
+                    
+                    <Label Margin="20, 0"
+                           FontSize="Subtitle"
+                           FontAttributes="Italic">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Confirmed"
+                                      x:Name="statusSpan"
+                                      TextColor="Green"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+                
+                <Button Text="Cancel" 
+                        x:Name="cancelBtn"
+                        Clicked="cancelBtn_Clicked"
+                        BorderColor="Black"
+                        BackgroundColor="Red"
+                        Margin="100, 0"
+                        TextColor="White" />
+                
+            </StackLayout>
+            
+        </Frame>
+
+        
+    </Grid>
+    
 </ContentPage>

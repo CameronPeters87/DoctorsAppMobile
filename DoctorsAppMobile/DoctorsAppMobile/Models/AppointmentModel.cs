@@ -1,4 +1,9 @@
-﻿using System;
+﻿using DoctorsAppMobile.Constants;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace DoctorsAppMobile.Models
 {
@@ -18,5 +23,47 @@ namespace DoctorsAppMobile.Models
         public bool isPaid { get; set; }
         public bool Complete { get; set; }
         public PatientModel PatientModel { get; set; }
+
+        List<AppointmentModel> model;
+
+        public List<AppointmentModel> AppointmentModels
+        {
+            get
+            {
+                return model;
+            }
+        }
+
+        public async Task Initialise()
+        {
+            model = new List<AppointmentModel>();
+
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            using (var client = new HttpClient(httpClientHandler))
+            {
+                Uri uri = new Uri(string.Format("{0}/Appointments", General.BASE_URL));
+                try
+                {
+                    var responseMessage = await client.GetAsync(uri);
+
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var content = responseMessage.Content
+                            .ReadAsStringAsync().Result;
+
+                        model = JsonConvert.DeserializeObject<List<AppointmentModel>>(content);
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
     }
 }

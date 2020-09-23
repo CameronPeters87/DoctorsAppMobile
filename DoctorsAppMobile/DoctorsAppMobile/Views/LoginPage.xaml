@@ -4,8 +4,28 @@
              x:Class="DoctorsAppMobile.Views.LoginPage"
              Title="Doctor Govender's App">
     
-    <StackLayout VerticalOptions="Center"
-                 Margin="20, 0">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--Title: Login-->
+        <Frame Grid.Row="0">
+            <Label Text="Login"
+                   FontSize="Title"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"/>
+        </Frame>
+        
+        <!--Image-->
+        
+        <!--Login Form-->
+        <StackLayout Grid.Row="1" 
+                     VerticalOptions="Center"
+                     Margin="20, 0">
+            
         <Entry x:Name="emailEntry"
                Keyboard="Email"
                Placeholder="Email"/>
@@ -17,8 +37,25 @@
                 BackgroundColor="#01d28e"
                 HorizontalOptions="Center"
                 CornerRadius="5"
-                FontSize="Large"
+                Margin="0, 20, 0 , 0"
                 Clicked="loginButton_Clicked"/>
-    </StackLayout>
+        </StackLayout>
+        
+        <!--Register-->
+        <StackLayout Grid.Row="2"
+                     Margin="0,0,0,20">
+            <Label Text="Don't have an account?" 
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+            <Button Text="Register"
+                    Margin="100, 0"
+                    CornerRadius="5"
+                    BackgroundColor="DodgerBlue" />
+
+        </StackLayout>
+        
+    </Grid>
+    
     
 </ContentPage>

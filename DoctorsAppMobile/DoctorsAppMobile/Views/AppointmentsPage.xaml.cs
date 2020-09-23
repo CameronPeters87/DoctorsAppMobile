@@ -1,4 +1,5 @@
-﻿using DoctorsAppMobile.ViewModels;
+﻿using DoctorsAppMobile.Models;
+using DoctorsAppMobile.ViewModels;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,10 +18,12 @@ namespace DoctorsAppMobile.Views
         {
             base.OnAppearing();
 
-            var appointment = new AppointmentViewModel();
+            var appointment = new AppointmentModel();
             await appointment.Initialise();
 
-            appointmentsListView.ItemsSource = appointment.AppointmentModels;
+            var model = new AppointmentViewModel(appointment);
+
+            appointmentsListView.ItemsSource = model.Appointments;
             appointmentsListView.Refreshing += AppointmentsListView_Refreshing;
         }
 
