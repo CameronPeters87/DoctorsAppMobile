@@ -89,7 +89,7 @@ namespace DoctorsAppMobile.Logic
         public AppointmentModel GetCurrentAppointment(PatientModel patient, List<AppointmentModel> allAppointments)
         {
             return allAppointments.Where(a => a.PatientName == PatientLogic.GetFullName(patient.FirstName, patient.Surname)
-                && !a.Complete)
+                && !a.Complete && a.PatientID == General.UserId)
                 .FirstOrDefault();
         }
     }

@@ -1,12 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DoctorsAppMobile.CustomRenders;assembly=DoctorsAppMobile"
              x:Class="DoctorsAppMobile.Views.OrdersPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="0">
+            <ListView x:Name="ordersListView"
+                      RowHeight="130"
+                      Margin="20, 0"
+                      ItemSelected="OrdersListView_ItemSelected"
+                      IsPullToRefreshEnabled="True"
+                      RefreshControlColor="#2d3e50">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Label Grid.Row="0"
+                                       Text="Order #1"
+                                       FontAttributes="Bold"
+                                       FontSize="Title"/>
+                                
+                                <Label Grid.Row="1"
+                                       Text="R30,00"
+                                       FontAttributes="Bold"
+                                       FontSize="Subtitle"/>
+                                
+                                <Label Grid.Row="2"
+                                       Text="Being Delivered"
+                                       FontSize="Subtitle"/>
+                                
+                                <Label Grid.Row="2" Grid.Column="1"
+                                       Text="03/11/2020"
+                                       HorizontalOptions="End"
+                                       FontSize="Subtitle"/>
+                            </Grid>
+                        </ViewCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+
+        <local:AdBanner Size="FullBanner"
+                        BackgroundColor="Transparent"
+                        Grid.Row="1" HeightRequest="75"/>
+    </Grid>
 </ContentPage>
