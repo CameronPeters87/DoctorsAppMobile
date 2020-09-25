@@ -29,21 +29,22 @@
                                 </Grid.RowDefinitions>
                                 
                                 <Label Grid.Row="0"
-                                       Text="Order #1"
+                                       Text="{Binding Id, StringFormat='Order #{0}'}"
                                        FontAttributes="Bold"
                                        FontSize="Title"/>
                                 
                                 <Label Grid.Row="1"
-                                       Text="R30,00"
+                                       Text="{Binding TotalCost, StringFormat='R{0:n2}'}"
                                        FontAttributes="Bold"
                                        FontSize="Subtitle"/>
                                 
                                 <Label Grid.Row="2"
-                                       Text="Being Delivered"
+                                       TextColor="{Binding StatusColor}"
+                                       Text="{Binding Status}"
                                        FontSize="Subtitle"/>
                                 
                                 <Label Grid.Row="2" Grid.Column="1"
-                                       Text="03/11/2020"
+                                       Text="{Binding OrderDate, StringFormat='{0:dd/MM/yyyy}'}"
                                        HorizontalOptions="End"
                                        FontSize="Subtitle"/>
                             </Grid>
