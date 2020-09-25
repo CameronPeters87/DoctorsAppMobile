@@ -49,7 +49,7 @@ namespace DoctorsAppMobile.Views
 
         private void OrdersListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            Navigation.PushAsync(new OrderDetailsPage());
         }
     }
 }

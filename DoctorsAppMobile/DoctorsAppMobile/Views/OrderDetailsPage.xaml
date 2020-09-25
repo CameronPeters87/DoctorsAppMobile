@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DoctorsAppMobile.Views.OrderDetailsPage">
+    
+    <ScrollView>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Frame Grid.Row="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--Order Id-->
+                <Label Grid.Row="0"
+                       Text="Order ID"
+                       FontSize="Subtitle"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <Label Grid.Row="1"
+                       Margin="0, 0, 0, 20"
+                       TextColor="Black"
+                       Text="2"/>
+                 
+                <!--Payment Method-->
+                <Label Grid.Row="0" Grid.Column="1"
+                       Text="Payment Method"
+                       FontSize="Subtitle"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <Label Grid.Row="1" Grid.Column="1"
+                       Margin="0, 0, 0, 20"
+                       TextColor="Black"
+                       Text="Cash on Delivery"/>
+                
+                <!--Date-->
+                <Label Grid.Row="2" Grid.Column="0"
+                       Text="Order Date"
+                       FontSize="Subtitle"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <Label Grid.Row="3" Grid.Column="0"
+                       Margin="0, 0, 0, 20"
+                       TextColor="Black"
+                       Text="22/11/2020"/>
+                
+                <!--Total-->
+                <Label Grid.Row="2" Grid.Column="1"
+                       Text="Total"
+                       FontSize="Subtitle"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                <Label Grid.Row="3" Grid.Column="1"
+                       TextColor="Black"
+                       Text="R149,99"/>
+                
+                <!--Billing-->
+
+                <Label Grid.Row="4" Grid.Column="0"
+                       Text="Billed to"
+                       FontSize="Subtitle"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                
+                <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
+                    <Label TextColor="Black"
+                           Text="Cameron Peters"/>
+                    <Label TextColor="Black"
+                           Text="0815600000"/>
+                    <Label TextColor="Black"
+                           Text="cameronpeters87@gmail.com"/>
+                    <Label TextColor="Black"
+                           Text="108 Allenby Road"/>
+                    <Label TextColor="Black"
+                           Text="Durban"/>
+                    <Label TextColor="Black"
+                           Text="Kwa Zulu-Natal, 4051"/>
+                    <Label TextColor="Black"
+                           Text="South Africa"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        
+        <Frame Grid.Row="1" IsVisible="false">
+        <ListView x:Name="ordersListView"
+                  RowHeight="130"
+                  Margin="20, 0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <BoxView Grid.Row="0"
+                                     HorizontalOptions="Center"
+                                     BackgroundColor="Green"/>
+                            
+                            <StackLayout Grid.Row="0" Grid.Column="1">
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="Toothpaste"
+                                       HorizontalOptions="Center"
+                                       TextColor="Black"/>
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="100g"
+                                       HorizontalOptions="Center"
+                                       TextColor="Gray"/>
+                            </StackLayout>
+                            <Label Grid.Row="0" Grid.Column="2"
+                                   Text="3"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"/>
+                            <Label Grid.Row="0" Grid.Column="3"
+                                   Text="R100"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </Frame>
+
+        <Frame Grid.Row="1"
+               Padding="0, 10">
+            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <BoxView Grid.Row="0"
+                     HorizontalOptions="Center"
+                     BackgroundColor="Green"/>
+            
+            <StackLayout Grid.Row="0" Grid.Column="1">
+                <Label Grid.Row="0" Grid.Column="1"
+                       Text="Eno"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Label Grid.Row="0" Grid.Column="1"
+                       Text="100g"
+                       HorizontalOptions="Center"
+                       TextColor="Gray"/>
+            </StackLayout>
+            <Label Grid.Row="0" Grid.Column="2"
+                   Text="3"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+            <Label Grid.Row="0" Grid.Column="3"
+                   Text="R100"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+            
+            <BoxView Grid.Row="1"
+                     HorizontalOptions="Center"
+                     BackgroundColor="Red"/>
+            <StackLayout Grid.Row="1" Grid.Column="1">
+                <Label Text="Panado"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="500g"
+                       HorizontalOptions="Center"
+                       TextColor="Gray"/>
+            </StackLayout>
+            
+            <Label Grid.Row="1" Grid.Column="2"
+                   Text="1"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+            <Label Grid.Row="1" Grid.Column="3"
+                   Text="R49,99"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+        </Grid>
+        </Frame>
+        
+        <Button Grid.Row="3"
+                Text="Confirm Delivery"
+                CornerRadius="10"
+                Margin="20, 20"
+                BackgroundColor="LightGreen" />
+    </Grid>
+    </ScrollView>
+    
+    
+    
+</ContentPage>
