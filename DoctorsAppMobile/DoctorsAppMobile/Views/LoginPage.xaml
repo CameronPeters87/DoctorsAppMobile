@@ -7,8 +7,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
         <!--Title: Login-->
@@ -20,9 +21,12 @@
         </Frame>
         
         <!--Image-->
+        <Image Grid.Row="1"
+               HorizontalOptions="Center"
+               x:Name="img"/>
         
         <!--Login Form-->
-        <StackLayout Grid.Row="1" 
+        <StackLayout Grid.Row="2" 
                      VerticalOptions="Center"
                      Margin="20, 0">
             
@@ -42,7 +46,7 @@
         </StackLayout>
         
         <!--Register-->
-        <StackLayout Grid.Row="2"
+        <StackLayout Grid.Row="3"
                      Margin="0,0,0,20">
             <Label Text="Don't have an account?" 
                    FontSize="Subtitle"

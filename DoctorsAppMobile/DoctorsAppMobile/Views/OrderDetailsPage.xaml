@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DoctorsAppMobile.Views.OrderDetailsPage">
     
-    <ScrollView>
-    <Grid>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Confirm"
+                     x:Name="confirmButton"
+                     Clicked="confirmButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
 
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Frame Grid.Row="0">
@@ -37,7 +39,8 @@
                 <Label Grid.Row="1"
                        Margin="0, 0, 0, 20"
                        TextColor="Black"
-                       Text="{Binding Id}"/>
+                       x:Name="orderIdLabel"
+                       Text=""/>
                  
                 <!--Payment Method-->
                 <Label Grid.Row="0" Grid.Column="1"
@@ -48,7 +51,8 @@
                 <Label Grid.Row="1" Grid.Column="1"
                        Margin="0, 0, 0, 20"
                        TextColor="Black"
-                       Text="{Binding PaymentMethod}"/>
+                       x:Name="paymentMethodLabel"
+                       Text=""/>
                 
                 <!--Date-->
                 <Label Grid.Row="2" Grid.Column="0"
@@ -59,7 +63,8 @@
                 <Label Grid.Row="3" Grid.Column="0"
                        Margin="0, 0, 0, 20"
                        TextColor="Black"
-                       Text="{Binding OrderDate, StringFormat='{0:dd/MM/yyyy'}"/>
+                       x:Name="orderDateLabel"
+                       Text=""/>
                 
                 <!--Total-->
                 <Label Grid.Row="2" Grid.Column="1"
@@ -69,7 +74,8 @@
                        FontAttributes="Bold"/>
                 <Label Grid.Row="3" Grid.Column="1"
                        TextColor="Black"
-                       Text="{Binding Total, StringFormat='R{0:n2}'}"/>
+                       x:Name="totalLabel"
+                       Text=""/>
                 
                 <!--Billing-->
 
@@ -81,68 +87,75 @@
                 
                 <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                     <Label TextColor="Black"
-                           Text="{Binding Name}"/>
+                           x:Name="nameLabel"
+                           Text=""/>
                     <Label TextColor="Black"
-                           Text="{Binding PhoneNumber}"/>
+                           x:Name="phoneNumberLabel"
+                           Text=""/>
                     <Label TextColor="Black"
-                           Text="{Binding Email}"/>
+                           x:Name="emailLabel"
+                           Text=""/>
                     <Label TextColor="Black"
-                           Text="{Binding Address}"/>
+                           x:Name="addressLabel"
+                           Text=""/>
+                    <Label TextColor="Black"
+                           x:Name="cityLabel"
+                           Text=""/>
                     <Label TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding City, StringFormat='{0}, '}" />
-                                <Span Text="{Binding ZipCode}" />
+                                <Span x:Name="provinceSpan"
+                                      Text="" />
+                                <Span x:Name="zipSpan"
+                                    Text="" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                     <Label TextColor="Black"
-                           Text="{Binding Country}"/>
+                           x:Name="countryLabel"
+                           Text=""/>
                 </StackLayout>
             </Grid>
         </Frame>
         
-        <Frame Grid.Row="1" IsVisible="True">
+        <Frame Grid.Row="1"
+               Padding="0">
             <ListView x:Name="cartListView"
-                      RowHeight="130"
+                      RowHeight="80"
                       Margin="20, 0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid Grid.Row="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
+                            <Grid Grid.Row="1"
+                                  Margin="0, 0, 0, 10">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 
-                                <BoxView Grid.Row="0"
-                                         HorizontalOptions="Center"
-                                         BackgroundColor="Green"/>
+                                <Image Grid.Row="0"
+                                       HorizontalOptions="Center"
+                                       HeightRequest="209"
+                                       WidthRequest="200"
+                                       Source="{Binding ImgUrl}"/>
                                 
                                 <StackLayout Grid.Row="0" Grid.Column="1">
                                     <Label Grid.Row="0" Grid.Column="1"
-                                           Text="Toothpaste"
+                                           Text="{Binding Name}"
                                            HorizontalOptions="Center"
                                            TextColor="Black"/>
                                     <Label Grid.Row="0" Grid.Column="1"
-                                           Text="100g"
+                                           Text="{Binding Size}"
                                            HorizontalOptions="Center"
                                            TextColor="Gray"/>
                                 </StackLayout>
-                                <Label Grid.Row="0" Grid.Column="2"
+                                <!--<Label Grid.Row="0" Grid.Column="2"
                                        Text="3"
-                                       HorizontalOptions="Center"
-                                       TextColor="Black"/>
-                                <Label Grid.Row="0" Grid.Column="3"
-                                       Text="R100"
+                                       HorizontalOptions="Start"
+                                       TextColor="Black"/>-->
+                                <Label Grid.Row="0" Grid.Column="2"
+                                       Text="{Binding Total, StringFormat='{0:n2}'}"
                                        HorizontalOptions="Center"
                                        TextColor="Black"/>
                             </Grid>
@@ -151,79 +164,5 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Frame>
-
-        <Frame Grid.Row="1"
-               IsVisible="False"
-               Padding="0, 10">
-            <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <BoxView Grid.Row="0"
-                     HorizontalOptions="Center"
-                     BackgroundColor="Green"/>
-            
-            <StackLayout Grid.Row="0" Grid.Column="1">
-                <Label Grid.Row="0" Grid.Column="1"
-                       Text="Eno"
-                       HorizontalOptions="Center"
-                       TextColor="Black"/>
-                <Label Grid.Row="0" Grid.Column="1"
-                       Text="100g"
-                       HorizontalOptions="Center"
-                       TextColor="Gray"/>
-            </StackLayout>
-            <Label Grid.Row="0" Grid.Column="2"
-                   Text="3"
-                   HorizontalOptions="Center"
-                   TextColor="Black"/>
-            <Label Grid.Row="0" Grid.Column="3"
-                   Text="R100"
-                   HorizontalOptions="Center"
-                   TextColor="Black"/>
-            
-            <BoxView Grid.Row="1"
-                     HorizontalOptions="Center"
-                     BackgroundColor="Red"/>
-            <StackLayout Grid.Row="1" Grid.Column="1">
-                <Label Text="Panado"
-                       HorizontalOptions="Center"
-                       TextColor="Black"/>
-                <Label Text="500g"
-                       HorizontalOptions="Center"
-                       TextColor="Gray"/>
-            </StackLayout>
-            
-            <Label Grid.Row="1" Grid.Column="2"
-                   Text="1"
-                   HorizontalOptions="Center"
-                   TextColor="Black"/>
-            <Label Grid.Row="1" Grid.Column="3"
-                   Text="R49,99"
-                   HorizontalOptions="Center"
-                   TextColor="Black"/>
-        </Grid>
-        </Frame>
-        
-        <Button Grid.Row="3"
-                x:Name="confirmButton"
-                Text="Confirm Delivery"
-                CornerRadius="10"
-                Margin="20, 20"
-                BackgroundColor="LightGreen" />
     </Grid>
-    </ScrollView>
-    
-    
-    
 </ContentPage>

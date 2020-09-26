@@ -61,8 +61,9 @@ namespace DoctorsAppMobile.Views
         {
             var orderPage = (OrdersPageModel)e.SelectedItem;
 
-            var orderDetail = (from order in orderLogic.MyOrders
+            var orderDetail = (from order in orderLogic.AllOrders
                                join status in statusLogic.Statuses on order.OrderStatusId equals status.Id
+                               where order.Id == orderPage.Id
                                select new OrderDetailPageModel
                                {
                                    Id = order.Id,
@@ -74,6 +75,7 @@ namespace DoctorsAppMobile.Views
                                    OrderDate = order.OrderDate,
                                    PaymentMethod = order.PaymentMethod,
                                    PhoneNumber = order.PhoneNumber,
+                                   Province = order.Province,
                                    ZipCode = order.ZipCode,
                                    StatusName = status.Name,
                                    Total = order.TotalCost

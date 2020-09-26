@@ -2,6 +2,8 @@
 using DoctorsAppMobile.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +17,7 @@ namespace DoctorsAppMobile.Views
         public LoginPage()
         {
             InitializeComponent();
+
         }
 
         protected override async void OnAppearing()
@@ -22,6 +25,8 @@ namespace DoctorsAppMobile.Views
             base.OnAppearing();
 
             patients = await PatientLogic.GetPatients();
+
+            img.Source = ImageSource.FromStream(() => new MemoryStream(new WebClient().DownloadData("https://192.168.8.47:45456/Files/Images/safeguard-hand-sanitiser-natural350ml-sanitiser.jpg")));
         }
 
         private async void loginButton_Clicked(object sender, EventArgs e)
