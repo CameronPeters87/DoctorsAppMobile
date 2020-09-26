@@ -37,7 +37,7 @@
                 <Label Grid.Row="1"
                        Margin="0, 0, 0, 20"
                        TextColor="Black"
-                       Text="2"/>
+                       Text="{Binding Id}"/>
                  
                 <!--Payment Method-->
                 <Label Grid.Row="0" Grid.Column="1"
@@ -48,7 +48,7 @@
                 <Label Grid.Row="1" Grid.Column="1"
                        Margin="0, 0, 0, 20"
                        TextColor="Black"
-                       Text="Cash on Delivery"/>
+                       Text="{Binding PaymentMethod}"/>
                 
                 <!--Date-->
                 <Label Grid.Row="2" Grid.Column="0"
@@ -59,7 +59,7 @@
                 <Label Grid.Row="3" Grid.Column="0"
                        Margin="0, 0, 0, 20"
                        TextColor="Black"
-                       Text="22/11/2020"/>
+                       Text="{Binding OrderDate, StringFormat='{0:dd/MM/yyyy'}"/>
                 
                 <!--Total-->
                 <Label Grid.Row="2" Grid.Column="1"
@@ -69,7 +69,7 @@
                        FontAttributes="Bold"/>
                 <Label Grid.Row="3" Grid.Column="1"
                        TextColor="Black"
-                       Text="R149,99"/>
+                       Text="{Binding Total, StringFormat='R{0:n2}'}"/>
                 
                 <!--Billing-->
 
@@ -81,74 +81,79 @@
                 
                 <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                     <Label TextColor="Black"
-                           Text="Cameron Peters"/>
+                           Text="{Binding Name}"/>
                     <Label TextColor="Black"
-                           Text="0815600000"/>
+                           Text="{Binding PhoneNumber}"/>
                     <Label TextColor="Black"
-                           Text="cameronpeters87@gmail.com"/>
+                           Text="{Binding Email}"/>
                     <Label TextColor="Black"
-                           Text="108 Allenby Road"/>
+                           Text="{Binding Address}"/>
+                    <Label TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding City, StringFormat='{0}, '}" />
+                                <Span Text="{Binding ZipCode}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Label TextColor="Black"
-                           Text="Durban"/>
-                    <Label TextColor="Black"
-                           Text="Kwa Zulu-Natal, 4051"/>
-                    <Label TextColor="Black"
-                           Text="South Africa"/>
+                           Text="{Binding Country}"/>
                 </StackLayout>
             </Grid>
         </Frame>
         
-        <Frame Grid.Row="1" IsVisible="false">
-        <ListView x:Name="ordersListView"
-                  RowHeight="130"
-                  Margin="20, 0">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <BoxView Grid.Row="0"
-                                     HorizontalOptions="Center"
-                                     BackgroundColor="Green"/>
-                            
-                            <StackLayout Grid.Row="0" Grid.Column="1">
-                                <Label Grid.Row="0" Grid.Column="1"
-                                       Text="Toothpaste"
+        <Frame Grid.Row="1" IsVisible="True">
+            <ListView x:Name="cartListView"
+                      RowHeight="130"
+                      Margin="20, 0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <BoxView Grid.Row="0"
+                                         HorizontalOptions="Center"
+                                         BackgroundColor="Green"/>
+                                
+                                <StackLayout Grid.Row="0" Grid.Column="1">
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="Toothpaste"
+                                           HorizontalOptions="Center"
+                                           TextColor="Black"/>
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="100g"
+                                           HorizontalOptions="Center"
+                                           TextColor="Gray"/>
+                                </StackLayout>
+                                <Label Grid.Row="0" Grid.Column="2"
+                                       Text="3"
                                        HorizontalOptions="Center"
                                        TextColor="Black"/>
-                                <Label Grid.Row="0" Grid.Column="1"
-                                       Text="100g"
+                                <Label Grid.Row="0" Grid.Column="3"
+                                       Text="R100"
                                        HorizontalOptions="Center"
-                                       TextColor="Gray"/>
-                            </StackLayout>
-                            <Label Grid.Row="0" Grid.Column="2"
-                                   Text="3"
-                                   HorizontalOptions="Center"
-                                   TextColor="Black"/>
-                            <Label Grid.Row="0" Grid.Column="3"
-                                   Text="R100"
-                                   HorizontalOptions="Center"
-                                   TextColor="Black"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                       TextColor="Black"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Frame>
 
         <Frame Grid.Row="1"
+               IsVisible="False"
                Padding="0, 10">
             <Grid>
             <Grid.RowDefinitions>
@@ -211,6 +216,7 @@
         </Frame>
         
         <Button Grid.Row="3"
+                x:Name="confirmButton"
                 Text="Confirm Delivery"
                 CornerRadius="10"
                 Margin="20, 20"

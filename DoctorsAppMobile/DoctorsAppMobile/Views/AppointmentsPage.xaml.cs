@@ -37,6 +37,9 @@ namespace DoctorsAppMobile.Views
                 throw e;
             }
 
+            General.AllAppointments = allAppointments;
+            General.AvailableAppointments = availableAppointments;
+
             appointmentsListView.ItemsSource = availableAppointments;
             appointmentsListView.Refreshing += AppointmentsListView_Refreshing;
             appointmentsListView.ItemSelected += AppointmentsListView_ItemSelected;
