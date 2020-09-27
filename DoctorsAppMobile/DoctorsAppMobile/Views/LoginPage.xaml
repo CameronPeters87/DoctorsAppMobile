@@ -23,7 +23,10 @@
         <!--Image-->
         <Image Grid.Row="1"
                HorizontalOptions="Center"
-               x:Name="img"/>
+               Aspect="AspectFill"
+               x:Name="imageLogin"
+               HeightRequest="200"
+               Source=""/>
         
         <!--Login Form-->
         <StackLayout Grid.Row="2" 

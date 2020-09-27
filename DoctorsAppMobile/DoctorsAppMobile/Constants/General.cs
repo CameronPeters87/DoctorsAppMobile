@@ -1,5 +1,6 @@
 ﻿using DoctorsAppMobile.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DoctorsAppMobile.Constants
 {
@@ -18,7 +19,7 @@ namespace DoctorsAppMobile.Constants
 
         public static List<AppointmentModel> AllAppointments { get; set; }
         public static List<AppointmentModel> AvailableAppointments { get; set; }
-
+        public static List<Stream> Streams { get; set; }
 
     }
 }
