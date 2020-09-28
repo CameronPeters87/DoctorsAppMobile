@@ -13,10 +13,12 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Frame Grid.Row="0">
+        <StackLayout Grid.Row="0"
+                     Padding="20">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -116,12 +118,22 @@
                            Text=""/>
                 </StackLayout>
             </Grid>
-        </Frame>
+        </StackLayout>
         
-        <Frame Grid.Row="1"
+        <StackLayout Grid.Row="1"
+               Padding="0, 10">
+            <Label Text="Items Purchased"
+                   FontSize="Title"
+                   FontAttributes="Bold"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
+        </StackLayout>
+        
+        <StackLayout Grid.Row="2"
                Padding="0">
             <ListView x:Name="cartListView"
-                      RowHeight="80"
+                      RowHeight="60"
+                      SelectionMode="None"
                       Margin="20, 0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -129,26 +141,11 @@
                             <Grid Grid.Row="1"
                                   Margin="0, 0, 0, 10">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                
-                                <BoxView Grid.Row="0"
-                                       HorizontalOptions="Center"
-                                       HeightRequest="50"
-                                       BackgroundColor="Green"/>
-                                
-                                <Image Grid.Row="0"
-                                       HorizontalOptions="Center"
-                                       HeightRequest="50"
-                                       Aspect="Fill">
-                                    <Image.Source>
-                                        <UriImageSource Uri="{Binding ImgUrl}" CacheValidity="1" CachingEnabled="true"/>
-                                    </Image.Source>
-                                </Image>
-                                
-                                <StackLayout Grid.Row="0" Grid.Column="1">
+
+                                <StackLayout Grid.Row="0" Grid.Column="0">
                                     <Label Grid.Row="0" Grid.Column="1"
                                            Text="{Binding Name}"
                                            HorizontalOptions="Center"
@@ -158,12 +155,8 @@
                                            HorizontalOptions="Center"
                                            TextColor="Gray"/>
                                 </StackLayout>
-                                <!--<Label Grid.Row="0" Grid.Column="2"
-                                       Text="3"
-                                       HorizontalOptions="Start"
-                                       TextColor="Black"/>-->
-                                <Label Grid.Row="0" Grid.Column="2"
-                                       Text="{Binding Total, StringFormat='{0:n2}'}"
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Total, StringFormat='R{0:n2}'}"
                                        HorizontalOptions="Center"
                                        TextColor="Black"/>
                             </Grid>
@@ -171,6 +164,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Frame>
+        </StackLayout>
     </Grid>
 </ContentPage>
