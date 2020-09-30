@@ -3,6 +3,7 @@ using DoctorsAppMobile.ViewModels;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ZXing.Net.Mobile.Forms;
 
 namespace DoctorsAppMobile.Views
 {
@@ -63,6 +64,28 @@ namespace DoctorsAppMobile.Views
 
         private void confirmButton_Clicked(object sender, System.EventArgs e)
         {
+            Scanner();
+        }
+
+        public async void Scanner()
+        {
+
+            var ScannerPage = new ZXingScannerPage();
+
+            ScannerPage.OnScanResult += (result) =>
+            {
+                ScannerPage.IsScanning = false;
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    // Logic to confirm order delivery in here
+
+                    Navigation.PopAsync();
+                    DisplayAlert("Hello", result.Text, "OK");
+                });
+            };
+
+            await Navigation.PushAsync(ScannerPage);
 
         }
     }

@@ -56,6 +56,7 @@ namespace DoctorsAppMobile.Views
             else
             {
                 titleLabel.Text = "You don't have an appointment booked.";
+                titleLabel.HorizontalTextAlignment = TextAlignment.Center;
                 loadingLabel.IsVisible = false;
             }
         }

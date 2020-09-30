@@ -18,8 +18,16 @@ namespace DoctorsAppMobile.ViewModels
                 {
                     return "Green";
                 }
-                else
+                else if (Status == "Processing")
+                {
                     return "Blue";
+                }
+                else if (Status == "Waiting")
+                {
+                    return "Blue";
+                }
+                else
+                    return "Orange";
             }
         }
     }
