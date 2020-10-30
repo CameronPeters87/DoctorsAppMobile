@@ -47,7 +47,7 @@ namespace DoctorsAppMobile.Views
             General.AllCart = cartLogic.AllCart;
 
             ordersListView.ItemsSource = orderList;
-            ordersListView.ItemSelected += OrdersListView_ItemSelected;
+            //ordersListView.ItemSelected += OrdersListView_ItemSelected;
             ordersListView.Refreshing += OrdersListView_Refreshing;
         }
 

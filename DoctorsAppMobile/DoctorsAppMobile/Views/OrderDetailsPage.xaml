@@ -87,6 +87,18 @@
                        TextColor="Gray"
                        FontAttributes="Bold"/>
                 
+                <Label Grid.Row="4" Grid.Column="1"
+                       Text="Status"
+                       FontSize="Subtitle"
+                       TextColor="Gray"
+                       FontAttributes="Bold"/>
+                
+                <Label Grid.Row="5" Grid.Column="1"
+                       TextColor="Black"
+                       x:Name="statusLabel"
+                       Text=""/>
+
+                
                 <StackLayout Grid.Row="5" Grid.ColumnSpan="2">
                     <Label TextColor="Black"
                            x:Name="nameLabel"
@@ -132,7 +144,7 @@
         <StackLayout Grid.Row="2"
                Padding="0">
             <ListView x:Name="cartListView"
-                      RowHeight="60"
+                      RowHeight="100"
                       SelectionMode="None"
                       Margin="20, 0">
                 <ListView.ItemTemplate>

@@ -32,10 +32,11 @@ namespace DoctorsAppMobile.Views
             var patient = await PatientLogic.GetPatientAsync(General.UserId);
 
             if (appointmentLogic.AllAppointments.Any(a => a.PatientName == PatientLogic.GetFullName(patient.FirstName, patient.Surname) &&
-                 !a.Complete))
+                 !a.Complete && a.PatientID == patient.UserID))
             {
                 current = appointmentLogic.GetCurrentAppointment(patient, appointmentLogic.AllAppointments);
 
+                titleLabel.IsVisible = false;
                 loadingLabel.IsVisible = false;
                 detailsFrame.IsVisible = true;
                 dateSpan.Text = current.AppointmentTime.ToLongDateString() + ", ";
@@ -58,6 +59,7 @@ namespace DoctorsAppMobile.Views
                 titleLabel.Text = "You don't have an appointment booked.";
                 titleLabel.HorizontalTextAlignment = TextAlignment.Center;
                 loadingLabel.IsVisible = false;
+                detailsFrame.IsVisible = false;
             }
         }
 

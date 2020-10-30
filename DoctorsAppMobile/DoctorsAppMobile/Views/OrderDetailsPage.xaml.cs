@@ -39,8 +39,6 @@ namespace DoctorsAppMobile.Views
                                           Total = items.Price
                                       }).ToList();
 
-
-
             BindData();
 
             cartListView.ItemsSource = details.CartItemsModel;
@@ -60,6 +58,7 @@ namespace DoctorsAppMobile.Views
             provinceSpan.Text = details.Province + ", ";
             zipSpan.Text = details.ZipCode;
             countryLabel.Text = details.Country;
+            statusLabel.Text = details.StatusName;
         }
 
         private void confirmButton_Clicked(object sender, System.EventArgs e)

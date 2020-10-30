@@ -42,7 +42,7 @@ namespace DoctorsAppMobile.Views
 
             appointmentsListView.ItemsSource = availableAppointments;
             appointmentsListView.Refreshing += AppointmentsListView_Refreshing;
-            appointmentsListView.ItemSelected += AppointmentsListView_ItemSelected;
+            //appointmentsListView.ItemSelected += AppointmentsListView_ItemSelected;
         }
 
         private async void AppointmentsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -52,7 +52,7 @@ namespace DoctorsAppMobile.Views
             var patient = await PatientLogic.GetPatientAsync(General.UserId);
             var fullname = PatientLogic.GetFullName(patient.FirstName, patient.Surname);
 
-            if (allAppointments.Any(a => a.PatientName == fullname))
+            if (allAppointments.Any(a => a.PatientName == fullname && a.PatientID == patient.UserID))
             {
                 await DisplayAlert("Appointment", "You already have an appointment booked!", "Okay");
             }
@@ -73,6 +73,7 @@ namespace DoctorsAppMobile.Views
                     appointment.diagnosis = string.Empty;
                     appointment.PatientModel = patient;
                     appointment.PatientName = string.Format("{0} {1}", patient.FirstName, patient.Surname);
+                    appointment.PatientID = patient.UserID;
 
                     await AppointmentLogic.UpdateCustomerAsync(appointment);
 
