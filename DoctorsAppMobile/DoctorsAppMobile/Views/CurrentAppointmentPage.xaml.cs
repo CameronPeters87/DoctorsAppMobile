@@ -56,6 +56,7 @@ namespace DoctorsAppMobile.Views
             }
             else
             {
+                titleLabel.IsVisible = true;
                 titleLabel.Text = "You don't have an appointment booked.";
                 titleLabel.HorizontalTextAlignment = TextAlignment.Center;
                 loadingLabel.IsVisible = false;
@@ -63,9 +64,15 @@ namespace DoctorsAppMobile.Views
             }
         }
 
-        private void cancelBtn_Clicked(object sender, EventArgs e)
+        private async void cancelBtn_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("User Id", General.UserId.ToString(), "Okay");
+            var date = current.AppointmentTime;
+
+            await AppointmentLogic.CancelAppointmentAsync(current);
+
+            await DisplayAlert("Appointment", string.Format("You cancelled your appointment on {0} at {1}", date.ToLongDateString(), date.ToShortTimeString()), "Okay");
+
+            OnAppearing();
         }
     }
 }

@@ -63,6 +63,27 @@ namespace DoctorsAppMobile.Logic
             sorted = model.Where(m => string.IsNullOrEmpty(m.PatientName)).ToList();
         }
 
+        public static async Task CancelAppointmentAsync(AppointmentModel model)
+        {
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            using (var client = new HttpClient(httpClientHandler))
+            {
+                Uri uri = new Uri(string.Format("{0}/Appointments/{1}", General.BASE_URL, model.AppointmentID));
+                try
+                {
+                    HttpResponseMessage responseMessage = await client.DeleteAsync(uri);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+
         public static async Task UpdateCustomerAsync(AppointmentModel model)
         {
             HttpClientHandler httpClientHandler = new HttpClientHandler();
