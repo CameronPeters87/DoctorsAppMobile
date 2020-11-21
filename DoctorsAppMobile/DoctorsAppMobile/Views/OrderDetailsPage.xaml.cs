@@ -78,9 +78,16 @@ namespace DoctorsAppMobile.Views
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     // Logic to confirm order delivery in here
-
-                    Navigation.PopAsync();
-                    DisplayAlert("Hello", result.Text, "OK");
+                    if (details.StatusName != "On it's way!")
+                    {
+                        Navigation.PopAsync();
+                        DisplayAlert("Order #" + details.Id, "You cannot confirm order delivery for this order.", "OK");
+                    }
+                    else
+                    {
+                        //if(delivery.OrderId == details.Id)
+                        // { if( }
+                    }
                 });
             };
 
