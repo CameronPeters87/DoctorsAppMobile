@@ -105,7 +105,10 @@ namespace DoctorsAppMobile.Views
                     // Logic to confirm order delivery in here
                     if (result.Text == delivery.QRCodeTextConfirmation)
                     {
+                        await Navigation.PopAsync();
                         await ConfirmAsync(delivery, driver, order, completedStatus);
+                        await DisplayAlert("Order #" + details.Id, "You successfully confirmed delivery!", "OK");
+
                     }
                     else
                     {
@@ -143,8 +146,6 @@ namespace DoctorsAppMobile.Views
             await driverLogic.UpdateDriver(driver);
             await orderLogic.UpdateOrder(order);
 
-            await Navigation.PopAsync();
-            await DisplayAlert("Order #" + details.Id, "You successfully confirmed delivery!", "OK");
         }
     }
 }
