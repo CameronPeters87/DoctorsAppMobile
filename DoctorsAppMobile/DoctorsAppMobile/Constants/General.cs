@@ -6,8 +6,8 @@ namespace DoctorsAppMobile.Constants
 {
     public class General
     {
-        public const string BASE_URL = "http://192.168.8.47:45455/api";
-        public const string URL = "http://192.168.8.47:45455";
+        public const string BASE_URL = "http://192.168.8.47:45459/api";
+        public const string URL = "http://192.168.8.47:45459";
 
         //public const string BASE_URL = "http://2020grp29drjames.azurewebsites.net/api";
         //public const string URL = "http://2020grp29drjames.azurewebsites.net";

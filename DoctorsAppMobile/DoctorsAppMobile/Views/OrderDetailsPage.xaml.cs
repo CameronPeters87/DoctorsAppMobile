@@ -1,5 +1,7 @@
 ﻿using DoctorsAppMobile.Logic;
+using DoctorsAppMobile.Models;
 using DoctorsAppMobile.ViewModels;
+using System;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,12 +14,20 @@ namespace DoctorsAppMobile.Views
     {
         OrderDetailPageModel details;
         ProductLogic productLogic;
+        DeliveryLogic deliveryLogic;
+        DriverLogic driverLogic;
+        OrderLogic orderLogic;
+        OrderStatusLogic statusLogic;
 
         public OrderDetailsPage(OrderDetailPageModel model)
         {
             InitializeComponent();
 
             productLogic = new ProductLogic();
+            deliveryLogic = new DeliveryLogic();
+            driverLogic = new DriverLogic();
+            orderLogic = new OrderLogic();
+            statusLogic = new OrderStatusLogic();
 
             details = model;
             details.CartItemsModel = new System.Collections.Generic.List<CustomerCartViewModel>();
@@ -68,6 +78,21 @@ namespace DoctorsAppMobile.Views
 
         public async void Scanner()
         {
+            if (details.StatusName != "On it's way!")
+            {
+                await DisplayAlert("Order #" + details.Id, "You cannot confirm order delivery for this order.", "OK");
+                await Navigation.PopAsync();
+            }
+
+            await deliveryLogic.Init();
+            await driverLogic.Init();
+            await orderLogic.Init();
+            await statusLogic.Init();
+
+            var delivery = deliveryLogic.GetDelivery(details, deliveryLogic.AllDeliveries);
+            var driver = driverLogic.GetDriver(delivery, driverLogic.AllDrivers);
+            var order = orderLogic.AllOrders.Where(o => o.Id == details.Id).FirstOrDefault();
+            var completedStatus = statusLogic.Statuses.Where(s => s.Name == "Completed").FirstOrDefault();
 
             var ScannerPage = new ZXingScannerPage();
 
@@ -75,24 +100,51 @@ namespace DoctorsAppMobile.Views
             {
                 ScannerPage.IsScanning = false;
 
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
                     // Logic to confirm order delivery in here
-                    if (details.StatusName != "On it's way!")
+                    if (result.Text == delivery.QRCodeTextConfirmation)
                     {
-                        Navigation.PopAsync();
-                        DisplayAlert("Order #" + details.Id, "You cannot confirm order delivery for this order.", "OK");
+                        await ConfirmAsync(delivery, driver, order, completedStatus);
                     }
                     else
                     {
-                        //if(delivery.OrderId == details.Id)
-                        // { if( }
+                        await Navigation.PopAsync();
+                        await DisplayAlert("Order #" + details.Id, "Not the right QR to confirm delivery.", "OK");
                     }
                 });
             };
 
+            //await deliveryLogic.UpdateDelivery(delivery);
+            //await driverLogic.UpdateDriver(driver);
+            //await orderLogic.UpdateOrder(order);
+
+            //await Navigation.PopAsync();
+            //await DisplayAlert("Order #" + details.Id, "You successfully confirmed delivery!", "OK");
             await Navigation.PushAsync(ScannerPage);
 
+        }
+
+        private async System.Threading.Tasks.Task ConfirmAsync(DeliveryApiModel delivery, DriverApiModel driver, CustomerOrderModel order, OrderStatusModel completedStatus)
+        {
+            // Delivery
+            delivery.Status = "Completed";
+            delivery.ConfirmationType = "Confirmed by QR Scan";
+            delivery.TimeDelivered = DateTime.Now;
+
+            // Driver
+            driver.Status = "Active";
+
+            // Order
+            order.OrderStatus = completedStatus;
+            order.OrderStatusId = completedStatus.Id;
+
+            await deliveryLogic.UpdateDelivery(delivery);
+            await driverLogic.UpdateDriver(driver);
+            await orderLogic.UpdateOrder(order);
+
+            await Navigation.PopAsync();
+            await DisplayAlert("Order #" + details.Id, "You successfully confirmed delivery!", "OK");
         }
     }
 }

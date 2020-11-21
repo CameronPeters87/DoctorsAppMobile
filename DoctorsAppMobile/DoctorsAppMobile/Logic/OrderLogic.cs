@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorsAppMobile.Logic
@@ -59,6 +60,29 @@ namespace DoctorsAppMobile.Logic
             }
 
             myOrders = allOrders.Where(o => o.CustomerId == General.UserId).ToList();
+        }
+
+        public async Task UpdateOrder(CustomerOrderModel order)
+        {
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            var json = JsonConvert.SerializeObject(order);
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient(httpClientHandler))
+            {
+                client.BaseAddress = new Uri(General.BASE_URL + "/");
+                try
+                {
+                    HttpResponseMessage responseMessage = await client.PutAsync("CustomerOrders", content);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
         }
 
     }

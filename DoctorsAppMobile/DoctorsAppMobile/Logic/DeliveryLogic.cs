@@ -1,9 +1,12 @@
 ﻿using DoctorsAppMobile.Constants;
 using DoctorsAppMobile.Models;
+using DoctorsAppMobile.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DoctorsAppMobile.Logic
@@ -49,5 +52,33 @@ namespace DoctorsAppMobile.Logic
             }
         }
 
+        public DeliveryApiModel GetDelivery(OrderDetailPageModel order, List<DeliveryApiModel> deliveries)
+        {
+            return deliveries.Where(d => d.OrderId == order.Id).FirstOrDefault();
+        }
+
+        public async Task UpdateDelivery(DeliveryApiModel delivery)
+        {
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            var json = JsonConvert.SerializeObject(delivery);
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            using (var client = new HttpClient(httpClientHandler))
+            {
+                client.BaseAddress = new Uri(General.BASE_URL + "/");
+                try
+                {
+                    HttpResponseMessage responseMessage = await client.PutAsync("Deliveries", content);
+                    string test = responseMessage.ToString();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
     }
 }

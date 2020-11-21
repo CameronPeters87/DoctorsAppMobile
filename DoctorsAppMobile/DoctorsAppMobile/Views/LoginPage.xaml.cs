@@ -1,4 +1,5 @@
-﻿using DoctorsAppMobile.Logic;
+﻿using DoctorsAppMobile.Constants;
+using DoctorsAppMobile.Logic;
 using DoctorsAppMobile.Models;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace DoctorsAppMobile.Views
             (message, cert, chain, errors) => { return true; };
 
             var client = new System.Net.Http.HttpClient(httpClientHandler);
-            System.IO.Stream imagestream = await client.GetStreamAsync("http://192.168.8.47:45455/Content/title.jpg");
+            System.IO.Stream imagestream = await client.GetStreamAsync(General.URL + "/Content/title.jpg");
             imageLogin.Source = ImageSource.FromStream(() => imagestream);
         }
 
