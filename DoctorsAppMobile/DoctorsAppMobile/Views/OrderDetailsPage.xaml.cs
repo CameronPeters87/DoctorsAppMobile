@@ -118,12 +118,6 @@ namespace DoctorsAppMobile.Views
                 });
             };
 
-            //await deliveryLogic.UpdateDelivery(delivery);
-            //await driverLogic.UpdateDriver(driver);
-            //await orderLogic.UpdateOrder(order);
-
-            //await Navigation.PopAsync();
-            //await DisplayAlert("Order #" + details.Id, "You successfully confirmed delivery!", "OK");
             await Navigation.PushAsync(ScannerPage);
 
         }
