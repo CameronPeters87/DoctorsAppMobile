@@ -20,6 +20,8 @@ namespace DoctorsAppMobile.Views
 
             loadingLabel.IsVisible = true;
             detailsFrame.IsVisible = false;
+
+            OnAppearing();
         }
 
         protected override async void OnAppearing()
